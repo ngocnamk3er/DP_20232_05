@@ -35,7 +35,7 @@ public class AuthenticationController extends BaseController {
             throw new ExpiredSessionException();
         } else return SessionInformation.mainUser.cloneInformation();
     }
-
+    //Common coupling, because using the shared data of SessionInformation
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
@@ -47,6 +47,7 @@ public class AuthenticationController extends BaseController {
         }
     }
 
+    //Common coupling, because using the shared data of SessionInformation
     public void logout() {
         SessionInformation.mainUser = null;
         SessionInformation.expiredTime = null;
