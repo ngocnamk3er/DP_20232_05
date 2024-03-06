@@ -38,7 +38,8 @@ public class IntroScreenHandler extends BaseScreenHandler {
         }
     }
 
-
+    //Stamp coupling
+    //Dto
     protected void setupData(Object dto) throws Exception {
         return;
     }

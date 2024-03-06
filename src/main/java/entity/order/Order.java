@@ -24,6 +24,8 @@ public class Order {
         this.tax = 0;
     }
 
+    //Common coupling
+    //Use non final global variable SessionInformation
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
         for (Object object : SessionInformation.cartInstance.getListMedia()) {

@@ -62,6 +62,8 @@ public class LoginScreenHandler extends BaseScreenHandler{
         return (AuthenticationController) super.getBController();
     }
 
+    //Stamp coupling
+    //Dont use dto
     protected void setupData(Object dto) throws Exception {
     }
 

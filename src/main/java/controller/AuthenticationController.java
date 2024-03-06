@@ -29,13 +29,19 @@ public class AuthenticationController extends BaseController {
         }
     }
 
+    //Common coupling
+    //Use non final global variable SessionInformation
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
             logout();
             throw new ExpiredSessionException();
         } else return SessionInformation.mainUser.cloneInformation();
     }
-    //Common coupling, because using the shared data of SessionInformation
+    //Common coupling
+    //Use non final global variable SessionInformation
+
+    //Data coupling
+    //Use email, password
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
@@ -47,7 +53,8 @@ public class AuthenticationController extends BaseController {
         }
     }
 
-    //Common coupling, because using the shared data of SessionInformation
+    //Common coupling
+    //Use non final global variable SessionInformation
     public void logout() {
         SessionInformation.mainUser = null;
         SessionInformation.expiredTime = null;
@@ -60,6 +67,9 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
+
+    //Data coupling
+    //Use message
     private String md5(String message) {
         String digest = null;
         try {

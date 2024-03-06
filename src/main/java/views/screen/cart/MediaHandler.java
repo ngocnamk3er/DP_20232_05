@@ -71,6 +71,8 @@ public class MediaHandler extends FXMLScreenHandler {
 		setMediaInfo();
 	}
 
+	//Common coupling
+	//REGULAR_FONT
 	private void setMediaInfo() {
 		title.setText(cartItem.getMedia().getTitle());
 		price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
