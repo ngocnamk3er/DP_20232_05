@@ -1,7 +1,14 @@
 ### Bài 2: Coupling
-- Subteam 1: Nguyễn Văn A, Nguyễn Thị B
-- Subteam 2: Nguyễn Văn C, Nguyễn Thị D
 - Nguyễn Ngọc Nam
+
+### Bài 2: Cohension
+- Nguyễn Ngọc Nam
+
+### Bài 3: SOLID: SRP, OCP
+
+### Bài 3: 
+
+
 
 
 
