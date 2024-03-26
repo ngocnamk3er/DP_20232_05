@@ -17,6 +17,7 @@ public class Order {
     private int tax;
     private List orderMediaList;
     protected DeliveryInfo deliveryInfo;
+    // Có dấu hiệu vi phạm DIP tại đây. Do Order sử dụng trực tiếp deliveryInfo
 
     public Order() {
         this.shippingFees = 0;

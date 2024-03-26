@@ -27,6 +27,7 @@ public class PaymentController extends BaseController {
 	 * Represent the card used for payment
 	 */
 	private CreditCard card;
+	// Vi phạm DIP do PaymentController đang phụ thuộc trực tiếp vào lớp CreditCard để tạo ra card
 
 	/**
 	 * Represent the Interbank subsystem

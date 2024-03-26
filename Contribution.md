@@ -12,7 +12,9 @@
     khởi tạo của các class con kế thừa từ Media trong package media
     - ISP
     Các lớp trong package Interface và subsystem ko vi phạm ISP
-    
+    - DIP
+    Nhiều class dùng trực tiếp instance của 
+    class khác mà không phải qua abstract class
 
 
 

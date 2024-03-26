@@ -5,6 +5,7 @@ import entity.order.Order;
 public class Invoice {
 
     private Order order;
+    // Có dấu hiệu vi phạm DIP tại đây. Do Invoice sử dụng trực tiếp Order
     private int amount;
     
     public Invoice(){

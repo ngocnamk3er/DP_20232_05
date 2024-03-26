@@ -5,6 +5,7 @@ import entity.media.Media;
 public class CartItem {
     
     private Media media;
+    // Có dấu hiệu vi phạm DIP tại đây. Do CartItem sử dụng trực tiếp Media
     private int quantity;
     private int price;
 
