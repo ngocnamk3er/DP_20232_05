@@ -4,7 +4,6 @@ import entity.order.Order;
 import org.example.DistanceCalculator;
 
 public class DeliveryInfo {
-
     protected String name;
     protected String phone;
     protected String province;
@@ -12,7 +11,7 @@ public class DeliveryInfo {
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;
 
-    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
+    private DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
         this.phone = phone;
         this.province = province;
@@ -21,7 +20,6 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
-    //Stamp coupling
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
