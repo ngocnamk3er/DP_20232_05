@@ -6,6 +6,8 @@ public class Invoice {
 
     private Order order;
     private int amount;
+
+    private String cardType;
     
     public Invoice(){
 
@@ -30,5 +32,9 @@ public class Invoice {
 
     public void saveInvoice(){
         
+    }
+
+    public String getCardType() {
+        return cardType;
     }
 }

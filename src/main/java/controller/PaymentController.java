@@ -8,6 +8,10 @@ import common.exception.InvalidCardException;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
 import entity.cart.Cart;
+import entity.payment.Card;
+import entity.payment.Creator.CardCreator;
+import entity.payment.Creator.CreditCardCreator;
+import entity.payment.Creator.DomesticCardCreator;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
@@ -26,7 +30,7 @@ public class PaymentController extends BaseController {
 	/**
 	 * Represent the card used for payment
 	 */
-	private CreditCard card;
+	private Card card;
 
 	/**
 	 * Represent the Interbank subsystem
@@ -81,16 +85,27 @@ public class PaymentController extends BaseController {
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
-	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
-			String expirationDate, String securityCode) {
-		Map<String, String> result = new Hashtable<String, String>();
+	public Map<String, String> payOrder(String cardType, int amount, String contents, String cardNumber, String cardHolderName,
+										String expirationDate, String securityCode) {
+		Map<String, String> result = new Hashtable<>();
 		result.put("RESULT", "PAYMENT FAILED!");
+
 		try {
-			this.card = new CreditCard(
+			CardCreator cardCreator;
+			if ("CreditCard".equalsIgnoreCase(cardType)) {
+				cardCreator = new CreditCardCreator();
+			} else if ("DomesticCard".equalsIgnoreCase(cardType)) {
+				cardCreator = new DomesticCardCreator();
+			} else {
+				throw new IllegalArgumentException("Unknown card type: " + cardType);
+			}
+
+			this.card = cardCreator.createCard(
 					cardNumber,
 					cardHolderName,
 					getExpirationDate(expirationDate),
-					Integer.parseInt(securityCode));
+					Integer.parseInt(securityCode)
+			);
 
 			this.interbank = new InterbankSubsystem();
 			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
@@ -99,6 +114,8 @@ public class PaymentController extends BaseController {
 			result.put("MESSAGE", "You have successfully paid the order!");
 		} catch (PaymentException | UnrecognizedException ex) {
 			result.put("MESSAGE", ex.getMessage());
+		} catch (IllegalArgumentException ex) {
+			result.put("MESSAGE", "Invalid card type: " + cardType);
 		}
 		return result;
 	}
