@@ -1,12 +1,35 @@
 package entity.user;
 
 public class User {
-    
+
+    /*
+    Đối tượng của lớp User là duy nhất trong chương trình nên:
+        + Chuyển thành singleton
+        + Bỏ phương thức cloneInformation() đi
+     */
     private int id;
     private String name;
     private String email;
     private String address;
     private String phone;
+
+    private static User instance;
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User(0, "", "", "", "");
+        }
+        return instance;
+    }
+    public User setUserInfo(int id, String name, String email, String address, String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        return this;
+    }
+
 
     public User(int id, String name, String email, String address, String phone) {
         this.id = id;
@@ -16,9 +39,9 @@ public class User {
         this.phone = phone;
     }
 
-    public User cloneInformation() {
-        return new User(this.id, this.name, this.email, this.address, this.phone);
-    }
+//    public User cloneInformation() {
+//        return new User(this.id, this.name, this.email, this.address, this.phone);
+//    }
     
     // override toString method
     @Override
