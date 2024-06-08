@@ -8,8 +8,21 @@ import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
 public class Cart {
-    
+    // SRP: trách nhiệm của Cart là quản lý giỏ hàng
+    // các hàm calSubtotal(), checkAvailabilityOfProduct() nên đặt trách nhiệm là của ViewCartController
+
+    /*
+        Cart là duy nhất trong chương trình: chuyển thành singleton
+     */
     private List<CartItem> lstCartItem;
+
+    private static Cart instance;
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
+        return instance;
+    }
 
     public Cart() {
         lstCartItem = new ArrayList<>();
@@ -27,9 +40,13 @@ public class Cart {
         return lstCartItem;
     }
 
+    // content coupling: biến lstCartItem
+    // solution: không trả về trực tiếp biến lstCartItem mà trả về bản copy của nó
+
     public void emptyCart(){
         lstCartItem.clear();
     }
+
 
     public int getTotalMedia(){
         int total = 0;
