@@ -34,6 +34,11 @@
                   <Font name="Calibri" size="24.0" />
                </font>
             </RadioButton>
+            <RadioButton disable="true" mnemonicParsing="false" selected="true" text="Domestic Card">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </RadioButton>
          </children>
       </VBox>
       <VBox layoutX="772.0" layoutY="158.0" prefHeight="500.0" prefWidth="500.0">

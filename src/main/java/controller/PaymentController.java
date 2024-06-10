@@ -78,34 +78,17 @@ public class PaymentController extends BaseController {
 	 * 
 	 * @param amount         - the amount to pay
 	 * @param contents       - the transaction contents
-	 * @param cardNumber     - the card number
-	 * @param cardHolderName - the card holder name
-	 * @param expirationDate - the expiration date in the format "mm/yy"
-	 * @param securityCode   - the cvv/cvc code of the credit card
+	 * @param cardCreator     - the card number
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
-	public Map<String, String> payOrder(String cardType, int amount, String contents, String cardNumber, String cardHolderName,
-										String expirationDate, String securityCode) {
+	public Map<String, String> payOrder(int amount, String contents, CardCreator cardCreator) {
 		Map<String, String> result = new Hashtable<>();
 		result.put("RESULT", "PAYMENT FAILED!");
 
 		try {
-			CardCreator cardCreator;
-			if ("CreditCard".equalsIgnoreCase(cardType)) {
-				cardCreator = new CreditCardCreator();
-			} else if ("DomesticCard".equalsIgnoreCase(cardType)) {
-				cardCreator = new DomesticCardCreator();
-			} else {
-				throw new IllegalArgumentException("Unknown card type: " + cardType);
-			}
 
-			this.card = cardCreator.createCard(
-					cardNumber,
-					cardHolderName,
-					getExpirationDate(expirationDate),
-					Integer.parseInt(securityCode)
-			);
+			this.card = cardCreator.createCard();
 
 			this.interbank = new InterbankSubsystem();
 			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
@@ -115,7 +98,7 @@ public class PaymentController extends BaseController {
 		} catch (PaymentException | UnrecognizedException ex) {
 			result.put("MESSAGE", ex.getMessage());
 		} catch (IllegalArgumentException ex) {
-			result.put("MESSAGE", "Invalid card type: " + cardType);
+			result.put("MESSAGE", "Invalid card type: " + card);
 		}
 		return result;
 	}

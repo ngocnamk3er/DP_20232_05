@@ -5,7 +5,10 @@ package entity.payment;
  */
 public class CreditCard extends Card{
 
-    public CreditCard(String cardCode, String owner, String dateExpired, int cvvCode) {
-        super(cardCode, owner, dateExpired, cvvCode);
+    private int cvvCode;
+    public CreditCard(String cardCode, String cardHolderName, String dateExpired, int cvvCode) {
+        super(cardCode, cardHolderName, dateExpired);
+        Type = "CreditCard";
+        this.cvvCode = cvvCode;
     }
 }

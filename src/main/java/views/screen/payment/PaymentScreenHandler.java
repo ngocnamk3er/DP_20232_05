@@ -2,6 +2,7 @@ package views.screen.payment;
 
 import controller.PaymentController;
 import entity.invoice.Invoice;
+import entity.payment.Creator.CardCreator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -73,11 +75,12 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 		});
 	}
 
-	void confirmToPayOrder() throws IOException{
+	void confirmToPayOrder() throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 		String contents = "pay order";
 		PaymentController ctrl = (PaymentController) getBController();
-		Map<String, String> response = ctrl.payOrder(invoice.getCardType() ,invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
-				expirationDate.getText(), securityCode.getText());
+
+		String cardType = "CreditCard";
+		Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, CardCreator.createCreactor(cardType));
 
 		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
 		resultScreen.setPreviousScreen(this);

@@ -37,7 +37,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	}
 
 	/**
-	 * @see InterbankInterface#refund(CreditCard, int,
+	 * @see InterbankInterface#refund(Card, int,
 	 *      String)
 	 */
 	public PaymentTransaction refund(Card card, int amount, String contents) {
