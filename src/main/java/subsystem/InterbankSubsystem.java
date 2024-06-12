@@ -11,11 +11,14 @@ import subsystem.interbank.InterbankSubsystemController;
  * @author hieud
  *
  */
+
+//Adapter
 public class InterbankSubsystem implements InterbankInterface {
 
 	/**
 	 * Represent the controller of the subsystem
 	 */
+	//Converter and Use orther service
 	private InterbankSubsystemController ctrl;
 
 	/**

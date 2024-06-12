@@ -5,7 +5,10 @@ import entity.payment.PaymentTransaction;
 
 public class InterbankSubsystemController {
 
+	//Converter
 	private static InterbankPayloadConverter interbankPayloadConverter = new InterbankPayloadConverter();
+
+	//Adaptee
 	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
